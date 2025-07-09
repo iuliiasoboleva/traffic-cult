@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { GlobalStyle } from './styles/GlobalStyle';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+
 import HomePage from './pages/HomePage';
+import { GlobalStyle } from './styles/GlobalStyle';
 
 function App() {
   return (

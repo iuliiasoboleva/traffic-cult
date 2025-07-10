@@ -7,25 +7,30 @@ import menuIcon from '../../assets/images/icons/menu.svg';
 import offersIcon from '../../assets/images/icons/offers.svg';
 import withdrawIcon from '../../assets/images/icons/withdraw.svg';
 import {
-  Divider,
   Dot,
   Footer,
   Header,
+  Logo,
+  LogoWrapper,
   MainItem,
   Menu,
   MenuGroup,
   MenuItem,
   MobileSidebar,
+  MobileSidebarWrapper,
   OffersDropdown,
   OffersToggle,
+  OpenHeader,
   Overlay,
   SidebarContainer,
   Title,
   ToggleButton,
   UserBadge,
+  UserLevel,
+  UserName,
 } from './styles';
 
-const Sidebar = ({ user, menuItems }) => {
+const Sidebar = ({ user, title, menuItems }) => {
   const [isMobileOpen, setMobileOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(menuItems[0].label);
   const [isOffersOpen, setOffersOpen] = useState(false);
@@ -34,27 +39,13 @@ const Sidebar = ({ user, menuItems }) => {
 
   const renderContent = () => (
     <>
-      <Header>
-        <Title>TRAFFIC CULT</Title>
-        {isMobileOpen && (
-          <img
-            src={closeIcon}
-            alt="Закрыть"
-            width={20}
-            height={20}
-            onClick={handleToggle}
-            style={{ cursor: 'pointer' }}
-          />
-        )}
-      </Header>
-
       <Menu>
         <OffersToggle $active onClick={() => setOffersOpen((prev) => !prev)}>
           <MainItem>
-            <img src={offersIcon} alt="Офферы" width={14} height={14} />
+            <img src={offersIcon} alt="Офферы" width={15} height={15} />
             <span>Офферы</span>
           </MainItem>
-          <img src={isOffersOpen ? arrowUp : arrowDown} alt="arrow" width={14} height={14} />
+          <img src={isOffersOpen ? arrowUp : arrowDown} alt="arrow" width={10} height={6} />
         </OffersToggle>
 
         {isOffersOpen && (
@@ -74,11 +65,9 @@ const Sidebar = ({ user, menuItems }) => {
           </OffersDropdown>
         )}
 
-        <Divider />
-
         <OffersToggle as="div" $active={false}>
           <MainItem>
-            <img src={withdrawIcon} alt="Вывод средств" width={14} height={14} />
+            <img src={withdrawIcon} alt="Вывод средств" width={15} height={15} />
             <span>Вывод средств</span>
           </MainItem>
         </OffersToggle>
@@ -93,8 +82,8 @@ const Sidebar = ({ user, menuItems }) => {
           )}
         </UserBadge>
         <div>
-          <div>{user.name}</div>
-          <small style={{ color: '#888' }}>Уровень: {user.level}</small>
+          <UserName>{user.name}</UserName>
+          <UserLevel>Уровень: {user.level}</UserLevel>
         </div>
       </Footer>
     </>
@@ -102,16 +91,39 @@ const Sidebar = ({ user, menuItems }) => {
 
   return (
     <>
-      <ToggleButton onClick={handleToggle}>
-        <img src={menuIcon} alt="Открыть меню" width={20} height={20} />
+      <ToggleButton>
+        <LogoWrapper>
+          <Logo />
+          <Title>{title}</Title>
+        </LogoWrapper>
+        <button>
+          <img src={menuIcon} alt="Открыть меню" width={24} height={24} onClick={handleToggle} />
+        </button>
       </ToggleButton>
 
-      <SidebarContainer>{renderContent()}</SidebarContainer>
+      <SidebarContainer>
+        <Header>
+          <Title>{title}</Title>
+        </Header>
+        {renderContent()}
+      </SidebarContainer>
 
       {isMobileOpen && (
         <>
           <Overlay onClick={handleToggle} />
-          <MobileSidebar>{renderContent()}</MobileSidebar>
+          <MobileSidebar>
+            <OpenHeader>
+              <img
+                src={closeIcon}
+                alt="Закрыть"
+                width={12}
+                height={12}
+                onClick={handleToggle}
+                style={{ cursor: 'pointer' }}
+              />
+            </OpenHeader>
+            <MobileSidebarWrapper>{renderContent()}</MobileSidebarWrapper>
+          </MobileSidebar>
         </>
       )}
     </>

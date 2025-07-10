@@ -13,7 +13,7 @@ const StatsSection = ({ title, stats }) => {
       <Header onClick={() => setOpen(!open)}>
         <Title>{title}</Title>
         <ToggleButton>
-          <img src={open ? chevronUpIcon : chevronDownIcon} alt="Toggle" width={16} height={16} />
+          <img src={open ? chevronUpIcon : chevronDownIcon} alt="Toggle" width={10} height={6} />
         </ToggleButton>{' '}
       </Header>
       {open && (

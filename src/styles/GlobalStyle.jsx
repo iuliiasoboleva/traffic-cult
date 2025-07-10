@@ -9,27 +9,32 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html, body {
-  min-height: 100vh;
+    min-height: 100vh;
     height: auto;
     overflow-x: hidden;
-  overscroll-behavior-y: none;
+    overscroll-behavior-y: none;
     font-family: 'Inter', sans-serif;
     background-color: #121315;
     color: #FFFFFF;
   }
 
   #root {
-      min-height: 100vh;
-  height: auto;
-  position: relative;
-  z-index: 0;
+    min-height: 100vh;
+    height: auto;
+    position: relative;
+    z-index: 0;
+  }
+
+  button {
+    all: unset;
+    cursor: pointer;
+    box-sizing: border-box;
   }
 
   .react-datepicker {
     background-color: #0c0e10;
     border: none;
     color: #fff;
-    font-family: inherit;
   }
 
   .react-datepicker__header {

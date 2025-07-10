@@ -5,33 +5,28 @@ export const TabsWrapper = styled.div`
   background-color: #1a1a1d;
   border-radius: 12px;
   padding: 4px;
+  gap: 4px; /* если хочешь отступы между табами */
+  /* width: 100%; ← это удаляем */
 `;
 
 export const TabButton = styled.button`
-  padding: 6px 16px;
-  border: none;
-  background-color: ${({ isActive }) => (isActive ? '#2a2a2f' : 'transparent')};
-  color: ${({ isActive }) => (isActive ? '#ffffff' : '#6e6e80')};
-  font-size: 14px;
-  border-radius: 8px;
-  font-weight: 500;
+  padding: 10px 15px;
+  border: ${({ isActive }) => (isActive ? '0.5px solid #2C3036' : 'none')};
+  background-color: ${({ isActive }) => (isActive ? '#2C3036' : '#18191C')};
+  color: ${({ isActive }) => (isActive ? '#ffffff' : '#585B6B')};
+  border-radius: 11px;
   cursor: pointer;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+
   transition:
     background-color 0.2s,
     color 0.2s;
 
   &:hover {
-    background-color: ${({ isActive }) => (isActive ? '#2a2a2f' : '#26262b')};
     color: #fff;
   }
-`;
-
-export const Select = styled.select`
-  background-color: #1a1a1d;
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  padding: 8px 12px;
-  font-size: 14px;
-  outline: none;
 `;

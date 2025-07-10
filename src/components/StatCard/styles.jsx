@@ -2,10 +2,9 @@ import styled from 'styled-components';
 
 export const Card = styled.div`
   width: 100%;
-  min-width: 140px;
   height: 150px;
   border-radius: 12px;
-  padding: 16px;
+  padding: 19px 16px;
   background: radial-gradient(98.3% 106.2% at 78.5% -10.33%, #202328 0%, #18191c 100%);
   border: 1px solid;
   border-image-source: radial-gradient(
@@ -18,28 +17,56 @@ export const Card = styled.div`
   flex-direction: column;
   justify-content: space-between;
   color: white;
+
+  @media (max-width: 768px) {
+    height: 118px;
+    padding: 14px 8px;
+  }
 `;
 
 export const Label = styled.div`
-  font-size: 14px;
-  color: #c0c0c0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 100%;
+  white-space: pre-line;
+  letter-spacing: -0.5px;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 export const ValueWrapper = styled.div`
   display: flex;
-  gap: 4px;
+  gap: 8px;
   align-items: center;
 `;
 
 export const Value = styled.div`
-  font-size: 24px;
   font-weight: 600;
   display: flex;
-  align-items: center;
   gap: 8px;
+  font-size: 28px;
+  line-height: 100%;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
-export const IconWrapper = styled.span`
-  font-size: 18px;
-  opacity: 0.6;
+export const IconWrapper = styled.div`
+  img {
+    width: 23px;
+    height: 23px;
+    margin-top: 5px;
+  }
+
+  @media (max-width: 768px) {
+    img {
+      width: 16px;
+      height: 16px;
+      margin-top: 6px;
+    }
+  }
 `;

@@ -8,37 +8,38 @@ import LinksFilterPanel from '../../components/LinksFilterPanel';
 import LinksTabs from '../../components/LinksTabs';
 import Sidebar from '../../components/Sidebar';
 import StatsSection from '../../components/StatsSection';
-import { Container, Content, FilterWrapper } from './styles';
+import { Container, Content, FilterWrapper, LinkTitle } from './styles';
 
 const statsMock = [
   {
-    label: 'Создано ссылок',
+    label: 'Создано\nссылок',
     value: 3,
     icon: <img src={linksIcon} alt="links" />,
     isCurrency: false,
   },
   {
-    label: 'Тотал регистраций',
+    label: 'Тотал\nрегистраций',
     value: 5,
     icon: <img src={registrationsIcon} alt="registrations" />,
     isCurrency: false,
   },
   {
-    label: 'Количество продаж',
+    label: 'Количество\nпродаж',
     value: 2,
     icon: <img src={salesIcon} alt="sales" />,
     isCurrency: false,
   },
-  { label: 'Тотал продаж', value: 180, icon: '', isCurrency: true },
+  { label: 'Тотал\nпродаж', value: 180, icon: '', isCurrency: true },
 ];
 
 const userMock = {
   name: 'Victor Hesoyam',
-  level: 'Junior',
+  level: 'junior',
   avatar: '',
 };
 
-const menuMock = [{ label: 'Трафик культ *' }, { label: 'Название №2' }, { label: 'Название №3' }];
+const menuMock = [{ label: 'Трафик культ' }, { label: 'Название №2' }, { label: 'Название №3' }];
+const title = 'TRAFFIC\nCULT';
 
 const HomePage = () => {
   const [filteredLinks, setFilteredLinks] = useState([]);
@@ -51,11 +52,11 @@ const HomePage = () => {
 
   return (
     <Container>
-      <Sidebar user={userMock} menuItems={menuMock} />
+      <Sidebar title={title} user={userMock} menuItems={menuMock} />
       <Content>
         <StatsSection title="Личная статистика" stats={statsMock} />
 
-        <h3 style={{ color: 'white', marginTop: 32 }}>Статистика по ссылкам</h3>
+        <LinkTitle>Статистика по ссылкам</LinkTitle>
         <FilterWrapper>
           <LinksTabs value={activeTab} onChange={setActiveTab} />
           <LinksFilterPanel onFilter={handleFilter} />

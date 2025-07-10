@@ -9,7 +9,7 @@ const StatCard = ({ label, value, icon, isCurrency }) => {
       <ValueWrapper>
         <Value>
           {value}
-          {isCurrency && '₽'}
+          {isCurrency && <span>₽</span>}
         </Value>
         <IconWrapper>{icon}</IconWrapper>
       </ValueWrapper>

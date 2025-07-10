@@ -2,19 +2,37 @@ import styled from 'styled-components';
 
 export const Section = styled.div`
   margin-bottom: 24px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 44px;
+  }
 `;
 
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 46px;
   cursor: pointer;
-  margin-bottom: 16px;
+  margin-bottom: 25px;
+  margin-left: 8px;
+
+  @media (max-width: 768px) {
+    gap: 0;
+    justify-content: space-between;
+    margin-left: 0;
+    margin-bottom: 15px;
+  }
 `;
 
 export const Title = styled.h3`
-  font-size: 16px;
+  font-size: 28px;
+  line-height: 100%;
+  letter-spacing: -0.5px;
   color: white;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 export const ToggleButton = styled.button`
@@ -24,12 +42,6 @@ export const ToggleButton = styled.button`
   display: flex;
   align-items: center;
   cursor: pointer;
-
-  img {
-    width: 16px;
-    height: 16px;
-    opacity: 0.8;
-  }
 `;
 
 export const CardsGrid = styled.div`
@@ -39,5 +51,6 @@ export const CardsGrid = styled.div`
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 `;

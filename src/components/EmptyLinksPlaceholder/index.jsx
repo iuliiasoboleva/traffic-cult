@@ -11,7 +11,7 @@ const EmptyLinksPlaceholder = ({ onCreate }) => {
         <IconCircle>0</IconCircle>
       </IconWrapper>
       <Title>У вас ещё нет созданных ссылок</Title>
-      <Subtitle>Чтобы провести аналитику и начать работать с трафиком, создайте ссылку</Subtitle>
+      <Subtitle>Чтобы провести анализ и начать работать с трафиком, создайте ссылку</Subtitle>
       <Button onClick={onCreate}>Создать ссылку</Button>
     </Wrapper>
   );

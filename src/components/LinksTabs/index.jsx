@@ -1,19 +1,14 @@
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { Select, TabButton, TabsWrapper } from './styles';
+import CustomSelect from '../CustomSelect';
+import { TabButton, TabsWrapper } from './styles';
 
 const tabs = ['Все ссылки', 'Избранные', 'Архив', 'Junior', 'Senior'];
 
 const LinksTabs = ({ value, onChange }) => {
   return isMobile ? (
-    <Select value={value} onChange={(e) => onChange(e.target.value)}>
-      {tabs.map((tab) => (
-        <option key={tab} value={tab}>
-          {tab}
-        </option>
-      ))}
-    </Select>
+    <CustomSelect value={value} onChange={(e) => onChange(e.target.value)} options={tabs} />
   ) : (
     <TabsWrapper>
       {tabs.map((tab) => (

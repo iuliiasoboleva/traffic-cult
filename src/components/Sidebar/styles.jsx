@@ -155,7 +155,7 @@ export const OffersToggle = styled.button`
 
   @media (max-width: 768px) {
     height: 41px;
-    max-width: 180px;
+    width: 100%;
     padding: 10px 12px;
   }
 `;
@@ -174,6 +174,7 @@ export const MenuGroup = styled.div`
   border-left: 1px solid #26282d;
   gap: 6px;
   width: 90%;
+  margin-left: auto;
 `;
 
 export const MainItem = styled.div`
@@ -210,7 +211,7 @@ export const MenuItem = styled.button`
 
   @media (max-width: 768px) {
     font-size: 14px;
-    max-width: 158px;
+    width: 100%;
   }
 `;
 

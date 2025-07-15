@@ -66,6 +66,28 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .react-datepicker__triangle {
-    display: none; /* убрать стрелочку */
+    display: none;
+  }
+  
+  [data-headlessui-state] {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  [data-headlessui-state]:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .headlessui-listbox-button:focus,
+  .headlessui-listbox-option:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .headlessui-listbox-button:focus-visible,
+  .headlessui-listbox-option:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
   }
 `;

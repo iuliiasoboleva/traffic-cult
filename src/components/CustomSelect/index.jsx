@@ -12,9 +12,7 @@ import {
   DropdownWrapper,
 } from './styles';
 
-const tabs = ['Все ссылки', 'Избранные', 'Архив', 'Junior', 'Senior'];
-
-const SelectDropdown = ({ value, onChange }) => {
+const CustomSelect = ({ options, value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -30,9 +28,9 @@ const SelectDropdown = ({ value, onChange }) => {
               </Listbox.Button>
 
               <Listbox.Options as={DropdownOptions}>
-                {tabs.map((tab) => (
-                  <Listbox.Option key={tab} value={tab} as={DropdownOption}>
-                    {({ selected }) => <span>{tab}</span>}
+                {options.map((option) => (
+                  <Listbox.Option key={option} value={option} as={DropdownOption}>
+                    {({ selected }) => <span>{option}</span>}
                   </Listbox.Option>
                 ))}
               </Listbox.Options>
@@ -44,4 +42,4 @@ const SelectDropdown = ({ value, onChange }) => {
   );
 };
 
-export default SelectDropdown;
+export default CustomSelect;

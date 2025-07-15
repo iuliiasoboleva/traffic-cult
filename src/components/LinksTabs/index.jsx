@@ -1,14 +1,16 @@
 import React from 'react';
-import { isMobile } from 'react-device-detect';
 
+import useIsMobile from '../../hooks/useIsMobile';
 import CustomSelect from '../CustomSelect';
 import { TabButton, TabsWrapper } from './styles';
 
 const tabs = ['Все ссылки', 'Избранные', 'Архив', 'Junior', 'Senior'];
 
 const LinksTabs = ({ value, onChange }) => {
+  const isMobile = useIsMobile();
+
   return isMobile ? (
-    <CustomSelect value={value} onChange={(e) => onChange(e.target.value)} options={tabs} />
+    <CustomSelect value={value} onChange={onChange} options={tabs} />
   ) : (
     <TabsWrapper>
       {tabs.map((tab) => (

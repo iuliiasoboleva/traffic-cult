@@ -2,25 +2,7 @@ import styled from 'styled-components';
 
 export const DropdownWrapper = styled.div`
   position: relative;
-  max-width: 138px;
-  width: 100%;
-`;
-
-export const DropdownButton = styled.button`
-  background-color: ${({ $isOpen }) => ($isOpen ? '#18191C' : '#2C3036')};
-  border: 0.5px solid ${({ $isOpen }) => ($isOpen ? '#F24822' : '#2C3036')};
-  color: white;
-  font-family: 'Inter Tight', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 8px 10px;
-  border-radius: 6px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.2s ease;
-  cursor: pointer;
+  width: 138px;
 `;
 
 export const ArrowImg = styled.img`
@@ -30,27 +12,60 @@ export const ArrowImg = styled.img`
 `;
 
 export const DropdownOptions = styled.ul`
-  background-color: #18191c;
-  border-radius: 8px;
+  background-color: rgba(24, 25, 28, 1);
+  border-radius: 5px;
   margin-top: 4px;
-  padding: 6px 0;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #2c3036;
+  padding: 4px 0;
+  gap: 10px;
+  border: 0.5px solid rgba(24, 25, 28, 1);
   z-index: 1000;
   position: absolute;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding-left: 0;
+`;
+
+export const DropdownButton = styled.button`
+  background-color: rgba(44, 48, 54, 1);
+  border: 0.5px solid rgba(44, 48, 54, 1);
+  color: #ffffff;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px 10px;
+  border-radius: 6px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
 `;
 
 export const DropdownOption = styled.li`
-  padding: 10px 14px;
-  cursor: pointer;
+  padding: 6px 13px;
   font-family: 'Inter Tight', sans-serif;
-  font-size: 14px;
-  color: white;
+  font-size: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  list-style: none;
+  outline: none;
+  box-shadow: none;
+  border-radius: 5px;
+  margin-left: 4px;
+  margin-right: 4px;
 
-  &:hover,
+  &:hover {
+    background-color: rgba(18, 19, 21, 1);
+  }
+
   &[aria-selected='true'] {
-    background-color: #2c3036;
+    background-color: rgba(18, 19, 21, 1);
+    font-weight: 500;
   }
 `;

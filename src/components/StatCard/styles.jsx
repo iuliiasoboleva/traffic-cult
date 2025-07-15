@@ -66,7 +66,7 @@ export const IconWrapper = styled.div`
     img {
       width: 16px;
       height: 16px;
-      margin-top: 6px;
+      margin-top: 4px;
     }
   }
 `;

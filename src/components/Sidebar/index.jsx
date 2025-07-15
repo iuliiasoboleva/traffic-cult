@@ -6,11 +6,11 @@ import closeIcon from '../../assets/images/icons/close.svg';
 import menuIcon from '../../assets/images/icons/menu.svg';
 import offersIcon from '../../assets/images/icons/offers.svg';
 import withdrawIcon from '../../assets/images/icons/withdraw.svg';
+import logo from '../../assets/images/logo.png';
 import {
   Dot,
   Footer,
   Header,
-  Logo,
   LogoWrapper,
   MainItem,
   Menu,
@@ -93,7 +93,7 @@ const Sidebar = ({ user, title, menuItems }) => {
     <>
       <ToggleButton>
         <LogoWrapper>
-          <Logo />
+          <img src={logo} alt="Лого" width={22} height={22} />
           <Title>{title}</Title>
         </LogoWrapper>
         <button>
@@ -103,6 +103,7 @@ const Sidebar = ({ user, title, menuItems }) => {
 
       <SidebarContainer>
         <Header>
+          <img src={logo} alt="Лого" width={32} height={32} />
           <Title>{title}</Title>
         </Header>
         {renderContent()}

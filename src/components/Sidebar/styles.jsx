@@ -8,15 +8,18 @@ export const SidebarContainer = styled.aside`
   border-radius: 0 25px 25px 0;
   padding: 20px;
   display: none;
+
+  position: sticky;
+  top: 0;
   overflow-y: auto;
-  gap: 20px;
+  z-index: 10;
 
   @media (min-width: 768px) {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    scrollbar-width: thin; /* Firefox */
+    scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
 
     &::-webkit-scrollbar {
@@ -84,12 +87,15 @@ export const ToggleButton = styled.div`
 
 export const LogoWrapper = styled.div`
   display: flex;
+  align-items: center;
+  gap: 4px;
 `;
 
 export const Header = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
 `;
 
 export const OpenHeader = styled.div`
@@ -101,16 +107,17 @@ export const OpenHeader = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 100%;
-  text-transform: uppercase;
-  color: #fff;
-  margin-bottom: 20px;
   display: inline-block;
-  height: 42px;
   word-break: break-word;
   white-space: pre-line;
+  font-size: 18px;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: white;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  transform: scaleY(0.86);
+  font-family: 'Barlow Condensed', sans-serif;
 
   @media (max-width: 768px) {
     font-size: 12px;
@@ -123,14 +130,6 @@ export const Menu = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`;
-
-export const Logo = styled.div`
-  height: 24px;
-  border-radius: 6px;
-  background-color: #18191c;
-  margin-right: 2px;
-  width: 24px;
 `;
 
 export const OffersToggle = styled.button`

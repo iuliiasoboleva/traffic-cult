@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import linksIcon from '../../assets/images/icons/links.svg';
 import registrationsIcon from '../../assets/images/icons/registrations.svg';
 import salesIcon from '../../assets/images/icons/sales.svg';
 import EmptyLinksPlaceholder from '../../components/EmptyLinksPlaceholder';
 import LinksFilterPanel from '../../components/LinksFilterPanel';
+import LinksList from '../../components/LinksList';
 import LinksTabs from '../../components/LinksTabs';
 import Sidebar from '../../components/Sidebar';
 import StatsSection from '../../components/StatsSection';
+import { linksMock } from '../../mocks/linksMock';
+import { userMock } from '../../mocks/userMock';
 import { Container, Content, FilterWrapper, LinkTitle } from './styles';
 
 const statsMock = [
@@ -32,18 +35,16 @@ const statsMock = [
   { label: 'Тотал\nпродаж', value: 180, icon: '', isCurrency: true },
 ];
 
-const userMock = {
-  name: 'Victor Hesoyam',
-  level: 'junior',
-  avatar: '',
-};
-
 const menuMock = [{ label: 'Трафик культ' }, { label: 'Название №2' }, { label: 'Название №3' }];
-const title = 'TRAFFIC\nCULT';
+const title = 'Трафик\nКульт ®';
 
 const HomePage = () => {
   const [filteredLinks, setFilteredLinks] = useState([]);
   const [activeTab, setActiveTab] = useState('Все ссылки');
+
+  useEffect(() => {
+    setFilteredLinks(linksMock);
+  }, []);
 
   const handleFilter = ({ from, to }) => {
     console.log('Фильтрация по:', from, to);
@@ -61,11 +62,11 @@ const HomePage = () => {
           <LinksTabs value={activeTab} onChange={setActiveTab} />
           <LinksFilterPanel onFilter={handleFilter} />
         </FilterWrapper>
-        {filteredLinks.length === 0 && (
+        {filteredLinks.length === 0 ? (
           <EmptyLinksPlaceholder onCreate={() => console.log('Создать ссылку')} />
+        ) : (
+          <LinksList items={filteredLinks} />
         )}
-
-        {/* Тут можно будет отрисовывать <LinksList items={filteredLinks} /> */}
       </Content>
     </Container>
   );

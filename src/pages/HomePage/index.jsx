@@ -43,12 +43,43 @@ const HomePage = () => {
   const [activeTab, setActiveTab] = useState('Все ссылки');
 
   useEffect(() => {
-    setFilteredLinks(linksMock);
-  }, []);
+    applyFilters();
+  }, [activeTab]);
+
+  const applyFilters = (dateRange = null) => {
+    let filtered = [...linksMock];
+
+    switch (activeTab) {
+      case 'Избранные':
+        filtered = filtered.filter((item) => item.favorite);
+        break;
+      case 'Архив':
+        filtered = filtered.filter((item) => item.archived);
+        break;
+      case 'Junior':
+      case 'Senior':
+        filtered = filtered.filter((item) => item.grade === activeTab);
+        break;
+      default:
+        break;
+    }
+
+    if (dateRange) {
+      const from = new Date(dateRange.from.setHours(0, 0, 0, 0));
+      const to = new Date(dateRange.to.setHours(23, 59, 59, 999));
+
+      filtered = filtered.filter((item) => {
+        const [day, month, year] = item.date.split('.');
+        const itemDate = new Date(`${year}-${month}-${day}`);
+        return itemDate >= from && itemDate <= to;
+      });
+    }
+
+    setFilteredLinks(filtered);
+  };
 
   const handleFilter = ({ from, to }) => {
-    console.log('Фильтрация по:', from, to);
-    setFilteredLinks([]);
+    applyFilters({ from, to });
   };
 
   return (

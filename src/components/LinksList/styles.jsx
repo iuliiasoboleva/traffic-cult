@@ -14,18 +14,25 @@ export const Table = styled.table`
   border-collapse: collapse;
   font-size: 14px;
   color: #fff;
-  min-width: 800px;
+  min-width: 1000px;
+  table-layout: fixed;
 `;
 
 export const Th = styled.th`
   text-align: left;
   padding: 10px;
   border-bottom: 1px solid #333;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const Td = styled.td`
   padding: 10px;
   border-bottom: 1px solid #222;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const ActionBtn = styled.button`

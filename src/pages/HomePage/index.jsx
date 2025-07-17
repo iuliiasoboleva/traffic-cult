@@ -9,9 +9,10 @@ import LinksList from '../../components/LinksList';
 import LinksTabs from '../../components/LinksTabs';
 import Sidebar from '../../components/Sidebar';
 import StatsSection from '../../components/StatsSection';
+import { capitalize } from '../../helpers';
 import { linksMock } from '../../mocks/linksMock';
 import { userMock } from '../../mocks/userMock';
-import { Container, Content, FilterWrapper, LinkTitle } from './styles';
+import { Container, Content, FilterWrapper, LinkTitle, StyledLevel } from './styles';
 
 const statsMock = [
   {
@@ -87,6 +88,15 @@ const HomePage = () => {
       <Sidebar title={title} user={userMock} menuItems={menuMock} />
       <Content>
         <StatsSection title="Личная статистика" stats={statsMock} />
+        <StatsSection
+          title={
+            <>
+              Общая статистика{' '}
+              <StyledLevel level={userMock.level}>{capitalize(userMock.level)}</StyledLevel>
+            </>
+          }
+          stats={statsMock}
+        />
 
         <LinkTitle>Статистика по ссылкам</LinkTitle>
         <FilterWrapper>

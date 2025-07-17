@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 
+import linkIcon from '../../assets/images/icons/link.svg';
 import { formatCurrency } from '../../helpers';
 import DropdownMenu from '../DropdownMenu';
-import { ActionBtn, ScrollWrapper, ShowMoreButton, Table, Td, Th } from './styles';
+import {
+  ActionBtn,
+  ScrollWrapper,
+  ShowMoreButton,
+  Table,
+  Td,
+  TdCenter,
+  TdLink,
+  Th,
+} from './styles';
 
 const sortItems = (items, key, direction) => {
   const sorted = [...items].sort((a, b) => {
@@ -97,17 +107,22 @@ const LinksList = ({ items }) => {
               <tr key={link.id}>
                 <Td>{index + 1}</Td>
                 <Td>{link.name}</Td>
-                <Td>
+                <TdLink>
                   <a href={link.url} target="_blank" rel="noreferrer">
                     {link.url}
                   </a>
-                </Td>
+                  <img
+                    src={linkIcon}
+                    alt="copy"
+                    onClick={() => navigator.clipboard.writeText(link.url)}
+                  />
+                </TdLink>
                 <Td>{link.source}</Td>
                 <Td>{link.date}</Td>
                 <Td>{link.registrations}</Td>
                 <Td>{formatCurrency(link.cost)}</Td>
                 <Td style={{ color: '#27C46A' }}>{'+' + formatCurrency(link.profit)}</Td>
-                <Td>
+                <TdCenter>
                   <ActionBtn
                     onClick={(e) =>
                       openMenu?.id === link.id ? setOpenMenu(null) : handleMenuOpen(e, link.id)
@@ -115,7 +130,7 @@ const LinksList = ({ items }) => {
                   >
                     ⋯
                   </ActionBtn>
-                </Td>
+                </TdCenter>
               </tr>
             ))}
           </tbody>

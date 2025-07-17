@@ -1,9 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-import { DropdownItem, DropdownMenuWrapper } from './styles';
+import archiveIcon from '../../assets/images/icons/archive.svg';
+import chartIcon from '../../assets/images/icons/chart.svg';
+import editIcon from '../../assets/images/icons/edit.svg';
+import starIcon from '../../assets/images/icons/star.svg';
+import trashIcon from '../../assets/images/icons/trash.svg';
+import { DangerItem, DropdownItem, DropdownMenuWrapper } from './styles';
 
-const DropdownMenu = ({ items, onClose, position }) => {
+const DropdownMenu = ({ onClose, position }) => {
   const ref = useRef();
 
   useEffect(() => {
@@ -29,17 +34,26 @@ const DropdownMenu = ({ items, onClose, position }) => {
         transform: position.openUp ? 'translateY(-100%)' : 'none',
       }}
     >
-      {items.map((item) => (
-        <DropdownItem
-          key={item.label}
-          onClick={() => {
-            item.onClick();
-            onClose?.();
-          }}
-        >
-          {item.icon} {item.label}
-        </DropdownItem>
-      ))}
+      <DropdownItem onClick={onClose}>
+        <img src={editIcon} alt="Редактировать" />
+        Редактирование
+      </DropdownItem>
+      <DropdownItem onClick={onClose}>
+        <img src={chartIcon} alt="Аналитика" />
+        Аналитика
+      </DropdownItem>
+      <DropdownItem onClick={onClose}>
+        <img src={starIcon} alt="Избранное" />
+        Избранное
+      </DropdownItem>
+      <DropdownItem onClick={onClose}>
+        <img src={archiveIcon} alt="Архив" />
+        Архив
+      </DropdownItem>
+      <DangerItem onClick={onClose}>
+        <img src={trashIcon} alt="Удалить" />
+        Удалить права
+      </DangerItem>
     </DropdownMenuWrapper>,
     document.getElementById('dropdown-root'),
   );

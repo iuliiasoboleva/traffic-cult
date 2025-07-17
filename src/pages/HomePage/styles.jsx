@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+const levelColors = {
+  junior: '#899FCB',
+  senior: '#F24822',
+  middle: '#FFD700',
+};
+
 export const Container = styled.div`
   display: flex;
   height: 100vh;
@@ -38,4 +44,10 @@ export const LinkTitle = styled.h3`
   @media (max-width: 768px) {
     font-size: 18px;
   }
+`;
+
+export const StyledLevel = styled.span`
+  color: ${({ level }) => levelColors[level] || '#fff'};
+  font-weight: 600;
+  letter-spacing: -0.02em;
 `;

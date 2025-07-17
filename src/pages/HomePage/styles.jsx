@@ -21,6 +21,7 @@ export const FilterWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin-bottom: 24px;
 `;
 
 export const Content = styled.main`
@@ -33,6 +34,10 @@ export const Content = styled.main`
   @media (max-width: 768px) {
     padding: 18px;
   }
+`;
+
+export const LinkWrapper = styled.div`
+  margin-top: 30px;
 `;
 
 export const LinkTitle = styled.h3`

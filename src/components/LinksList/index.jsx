@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import linkIcon from '../../assets/images/icons/link.svg';
+import switchIcon from '../../assets/images/icons/switch.svg';
 import { formatCurrency } from '../../helpers';
 import DropdownMenu from '../DropdownMenu';
 import {
@@ -11,6 +12,7 @@ import {
   Td,
   TdCenter,
   TdLink,
+  TdProfit,
   Th,
 } from './styles';
 
@@ -18,7 +20,6 @@ const sortItems = (items, key, direction) => {
   const sorted = [...items].sort((a, b) => {
     const valueA = a[key].toString().replace(/[^\d.-]+/g, '');
     const valueB = b[key].toString().replace(/[^\d.-]+/g, '');
-
     const isNumeric = !isNaN(valueA) && !isNaN(valueB);
 
     if (isNumeric) {
@@ -35,6 +36,13 @@ const LinksList = ({ items }) => {
   const [visibleCount, setVisibleCount] = useState(8);
   const [openMenu, setOpenMenu] = useState(null);
   const [sort, setSort] = useState({ key: null, direction: 'asc' });
+  const [copiedLinkId, setCopiedLinkId] = useState(null);
+
+  const handleCopy = (url, id) => {
+    navigator.clipboard.writeText(url);
+    setCopiedLinkId(id);
+    setTimeout(() => setCopiedLinkId(null), 1500);
+  };
 
   const handleShowMore = () => setVisibleCount((prev) => prev + 8);
 
@@ -66,46 +74,45 @@ const LinksList = ({ items }) => {
   };
 
   const renderSortArrow = (columnKey) => {
-    if (sort.key !== columnKey) return '⇅';
-    return sort.direction === 'asc' ? '↑' : '↓';
+    if (sort.key !== columnKey) {
+      return <img src={switchIcon} alt="sort" />;
+    }
+
+    return <span className="sort-arrow">{sort.direction === 'asc' ? '↑' : '↓'}</span>;
   };
 
   return (
     <>
       <ScrollWrapper>
         <Table>
-          <thead>
+          <thead style={{ height: '50px' }}>
             <tr>
-              <Th style={{ width: '40px' }}>№</Th>
-              <Th style={{ width: '130px' }}>Название</Th>
-              <Th style={{ width: '180px' }}>Ссылка</Th>
-              <Th style={{ width: '100px' }}>Источник</Th>
-              <Th style={{ width: '100px', cursor: 'pointer' }} onClick={() => handleSort('date')}>
-                Дата {renderSortArrow('date')}
+              <Th $center width="40px">
+                №
               </Th>
-              <Th
-                style={{ width: '120px', cursor: 'pointer' }}
-                onClick={() => handleSort('registrations')}
-              >
-                Регистраций {renderSortArrow('registrations')}
+              <Th width="130px">Название</Th>
+              <Th width="180px">Ссылка</Th>
+              <Th width="100px">Источник</Th>
+              <Th sortable onClick={() => handleSort('date')} width="100px">
+                <span className="th-content">Дата {renderSortArrow('date')}</span>
               </Th>
-              <Th style={{ width: '100px', cursor: 'pointer' }} onClick={() => handleSort('cost')}>
-                Стоимость {renderSortArrow('cost')}
+              <Th sortable onClick={() => handleSort('registrations')} width="120px">
+                <span className="th-content">Регистраций {renderSortArrow('registrations')}</span>
               </Th>
-              <Th
-                style={{ width: '100px', cursor: 'pointer' }}
-                onClick={() => handleSort('profit')}
-              >
-                Прибыль {renderSortArrow('profit')}
+              <Th sortable onClick={() => handleSort('cost')} width="100px">
+                <span className="th-content">Стоимость {renderSortArrow('cost')}</span>
               </Th>
-              <Th style={{ width: '80px' }}>Действия</Th>
+              <Th sortable onClick={() => handleSort('profit')} width="100px">
+                <span className="th-content">Прибыль {renderSortArrow('profit')}</span>
+              </Th>
+              <Th width="80px">Действия</Th>
             </tr>
           </thead>
 
           <tbody>
             {visibleItems.map((link, index) => (
               <tr key={link.id}>
-                <Td>{index + 1}</Td>
+                <TdCenter>{index + 1}</TdCenter>
                 <Td>{link.name}</Td>
                 <TdLink>
                   <a href={link.url} target="_blank" rel="noreferrer">
@@ -114,14 +121,17 @@ const LinksList = ({ items }) => {
                   <img
                     src={linkIcon}
                     alt="copy"
-                    onClick={() => navigator.clipboard.writeText(link.url)}
+                    className={copiedLinkId === link.id ? 'copied' : ''}
+                    onClick={() => handleCopy(link.url, link.id)}
                   />
                 </TdLink>
                 <Td>{link.source}</Td>
                 <Td>{link.date}</Td>
                 <Td>{link.registrations}</Td>
                 <Td>{formatCurrency(link.cost)}</Td>
-                <Td style={{ color: '#27C46A' }}>{'+' + formatCurrency(link.profit)}</Td>
+                <TdProfit>
+                  <span>{'+' + formatCurrency(link.profit)}</span>
+                </TdProfit>
                 <TdCenter>
                   <ActionBtn
                     onClick={(e) =>
@@ -137,30 +147,7 @@ const LinksList = ({ items }) => {
         </Table>
       </ScrollWrapper>
 
-      {openMenu && (
-        <DropdownMenu
-          items={[
-            {
-              label: 'Редактирование',
-              icon: '✏️',
-              onClick: () => console.log('Редактировать', openMenu.id),
-            },
-            {
-              label: 'Аналитика',
-              icon: '📊',
-              onClick: () => console.log('Аналитика', openMenu.id),
-            },
-            {
-              label: 'Избранное',
-              icon: '⭐',
-              onClick: () => console.log('Избранное', openMenu.id),
-            },
-            { label: 'Архив', icon: '📁', onClick: () => console.log('Архив', openMenu.id) },
-          ]}
-          position={openMenu.position}
-          onClose={() => setOpenMenu(null)}
-        />
-      )}
+      {openMenu && <DropdownMenu position={openMenu.position} onClose={() => setOpenMenu(null)} />}
 
       {visibleCount < items.length && (
         <ShowMoreButton onClick={handleShowMore}>Показать все ссылки</ShowMoreButton>

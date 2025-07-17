@@ -11,6 +11,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/withdrawal" element={<Withdrawal />} />
         </Routes>
       </Router>
     </>

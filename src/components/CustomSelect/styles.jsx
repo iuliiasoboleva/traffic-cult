@@ -35,7 +35,7 @@ export const DropdownButton = styled.button`
   font-size: 12px;
   font-weight: 500;
   padding: 8px 10px;
-  border-radius: 6px;
+  border-radius: 5px;
   width: 100%;
   display: flex;
   justify-content: space-between;

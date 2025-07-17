@@ -12,7 +12,7 @@ import StatsSection from '../../components/StatsSection';
 import { capitalize } from '../../helpers';
 import { linksMock } from '../../mocks/linksMock';
 import { userMock } from '../../mocks/userMock';
-import { Container, Content, FilterWrapper, LinkTitle, StyledLevel } from './styles';
+import { Container, Content, FilterWrapper, LinkTitle, LinkWrapper, StyledLevel } from './styles';
 
 const statsMock = [
   {
@@ -97,17 +97,18 @@ const HomePage = () => {
           }
           stats={statsMock}
         />
-
-        <LinkTitle>Статистика по ссылкам</LinkTitle>
-        <FilterWrapper>
-          <LinksTabs value={activeTab} onChange={setActiveTab} />
-          <LinksFilterPanel onFilter={handleFilter} />
-        </FilterWrapper>
-        {filteredLinks.length === 0 ? (
-          <EmptyLinksPlaceholder onCreate={() => console.log('Создать ссылку')} />
-        ) : (
-          <LinksList items={filteredLinks} />
-        )}
+        <LinkWrapper>
+          <LinkTitle>Статистика по ссылкам</LinkTitle>
+          <FilterWrapper>
+            <LinksTabs value={activeTab} onChange={setActiveTab} />
+            <LinksFilterPanel onFilter={handleFilter} />
+          </FilterWrapper>
+          {filteredLinks.length === 0 ? (
+            <EmptyLinksPlaceholder onCreate={() => console.log('Создать ссылку')} />
+          ) : (
+            <LinksList items={filteredLinks} />
+          )}
+        </LinkWrapper>
       </Content>
     </Container>
   );

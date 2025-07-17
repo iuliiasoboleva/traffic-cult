@@ -8,6 +8,30 @@ import starIcon from '../../assets/images/icons/star.svg';
 import trashIcon from '../../assets/images/icons/trash.svg';
 import { DangerItem, DropdownItem, DropdownMenuWrapper } from './styles';
 
+const menuItems = [
+  {
+    label: 'Редактирование',
+    icon: editIcon,
+  },
+  {
+    label: 'Аналитика',
+    icon: chartIcon,
+  },
+  {
+    label: 'Избранное',
+    icon: starIcon,
+  },
+  {
+    label: 'Архив',
+    icon: archiveIcon,
+  },
+  {
+    label: 'Удалить права',
+    icon: trashIcon,
+    danger: true,
+  },
+];
+
 const DropdownMenu = ({ onClose, position }) => {
   const ref = useRef();
 
@@ -17,6 +41,7 @@ const DropdownMenu = ({ onClose, position }) => {
         onClose?.();
       }
     };
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [onClose]);
@@ -34,26 +59,22 @@ const DropdownMenu = ({ onClose, position }) => {
         transform: position.openUp ? 'translateY(-100%)' : 'none',
       }}
     >
-      <DropdownItem onClick={onClose}>
-        <img src={editIcon} alt="Редактировать" />
-        Редактирование
-      </DropdownItem>
-      <DropdownItem onClick={onClose}>
-        <img src={chartIcon} alt="Аналитика" />
-        Аналитика
-      </DropdownItem>
-      <DropdownItem onClick={onClose}>
-        <img src={starIcon} alt="Избранное" />
-        Избранное
-      </DropdownItem>
-      <DropdownItem onClick={onClose}>
-        <img src={archiveIcon} alt="Архив" />
-        Архив
-      </DropdownItem>
-      <DangerItem onClick={onClose}>
-        <img src={trashIcon} alt="Удалить" />
-        Удалить права
-      </DangerItem>
+      {menuItems.map(({ label, icon, danger }) => {
+        const Item = danger ? DangerItem : DropdownItem;
+
+        return (
+          <Item
+            key={label}
+            onClick={() => {
+              console.log(`${label} clicked`);
+              onClose?.();
+            }}
+          >
+            <img src={icon} alt={label} />
+            {label}
+          </Item>
+        );
+      })}
     </DropdownMenuWrapper>,
     document.getElementById('dropdown-root'),
   );

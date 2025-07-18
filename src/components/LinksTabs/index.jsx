@@ -1,15 +1,13 @@
 import React from 'react';
 
-import useIsMobile from '../../hooks/useIsMobile';
+import useIsTablet from '../../hooks/useIsTablet';
 import CustomSelect from '../CustomSelect';
 import { TabButton, TabsWrapper } from './styles';
 
-const tabs = ['Все ссылки', 'Избранные', 'Архив', 'Junior', 'Senior'];
+const LinksTabs = ({ tabs, value, onChange }) => {
+  const isTablet = useIsTablet();
 
-const LinksTabs = ({ value, onChange }) => {
-  const isMobile = useIsMobile();
-
-  return isMobile ? (
+  return isTablet ? (
     <CustomSelect value={value} onChange={onChange} options={tabs} />
   ) : (
     <TabsWrapper>

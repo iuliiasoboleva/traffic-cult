@@ -98,15 +98,8 @@ export const Td = styled.td`
   text-overflow: ellipsis;
 `;
 
-export const TdCenter = styled.td`
-  text-align: center;
-  vertical-align: middle;
-  padding: 4px 6px;
-`;
-
 export const TdProfit = styled.td`
   padding: 4px 6px;
-  text-align: center;
   vertical-align: middle;
 
   span {
@@ -159,14 +152,16 @@ export const TdLink = styled.td`
   }
 `;
 
-export const ActionBtn = styled.button`
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 20px;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 0 5px;
+export const ButtonBlock = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    margin: 20px auto;
+    width: 100%;
+    flex-direction: column-reverse;
+    gap: 4px;
+  }
 `;
 
 export const ShowMoreButton = styled.button`
@@ -187,9 +182,39 @@ export const ShowMoreButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    margin: 20px auto;
     width: 100%;
     text-align: center;
     font-size: 14px;
+  }
+`;
+
+export const DownloadButton = styled.button`
+  margin-bottom: 20px;
+  padding: 12px 20px;
+  background: none;
+  border: 1px solid #454a52;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Inter Tight', sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    background-color: #222;
+  }
+
+  img {
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    justify-content: center;
   }
 `;

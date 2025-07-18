@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import arrowDown from '../../assets/images/icons/arrow-down.svg';
 import arrowUp from '../../assets/images/icons/arrow-up.svg';
@@ -55,7 +56,10 @@ const Sidebar = ({ user, title, menuItems }) => {
                 <MenuItem
                   key={item.label}
                   $active={activeItem === item.label}
-                  onClick={() => setActiveItem(item.label)}
+                  onClick={() => {
+                    setActiveItem(item.label);
+                    if (isMobileOpen) handleToggle();
+                  }}
                 >
                   <span>{item.label}</span>
                   {activeItem === item.label && <Dot />}
@@ -65,12 +69,20 @@ const Sidebar = ({ user, title, menuItems }) => {
           </OffersDropdown>
         )}
 
-        <OffersToggle as="div" $active={false}>
-          <MainItem>
-            <img src={withdrawIcon} alt="Вывод средств" width={15} height={15} />
-            <span>Вывод средств</span>
-          </MainItem>
-        </OffersToggle>
+        <Link
+          to="/withdrawal"
+          style={{ textDecoration: 'none' }}
+          onClick={() => {
+            if (isMobileOpen) handleToggle();
+          }}
+        >
+          <OffersToggle as="div" $active={false}>
+            <MainItem>
+              <img src={withdrawIcon} alt="Вывод средств" width={15} height={15} />
+              <span>Вывод средств</span>
+            </MainItem>
+          </OffersToggle>
+        </Link>
       </Menu>
 
       <Footer>
@@ -92,20 +104,25 @@ const Sidebar = ({ user, title, menuItems }) => {
   return (
     <>
       <ToggleButton>
-        <LogoWrapper>
-          <img src={logo} alt="Лого" width={22} height={22} />
-          <Title>{title}</Title>
-        </LogoWrapper>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <LogoWrapper>
+            <img src={logo} alt="Лого" width={22} height={22} />
+            <Title>{title}</Title>
+          </LogoWrapper>
+        </Link>
         <button>
           <img src={menuIcon} alt="Открыть меню" width={24} height={24} onClick={handleToggle} />
         </button>
       </ToggleButton>
 
       <SidebarContainer>
-        <Header>
-          <img src={logo} alt="Лого" width={32} height={32} />
-          <Title>{title}</Title>
-        </Header>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <Header>
+            <img src={logo} alt="Лого" width={32} height={32} />
+            <Title>{title}</Title>
+          </Header>
+        </Link>
+
         {renderContent()}
       </SidebarContainer>
 

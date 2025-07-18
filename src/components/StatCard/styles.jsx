@@ -40,12 +40,13 @@ export const ValueWrapper = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const Value = styled.div`
   font-weight: 600;
   display: flex;
-  gap: 8px;
+  gap: 6px;
   font-size: 28px;
   line-height: 100%;
   align-items: center;
@@ -68,5 +69,16 @@ export const IconWrapper = styled.div`
       height: 16px;
       margin-top: 4px;
     }
+  }
+`;
+
+export const Sublabel = styled.div`
+  font-size: 12px;
+  line-height: 1.2;
+  color: #777c85;
+  margin-top: 4px;
+
+  @media (max-width: 768px) {
+    font-size: 11px;
   }
 `;

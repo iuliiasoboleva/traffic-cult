@@ -39,9 +39,38 @@ const LinksList = ({ items }) => {
   const [copiedLinkId, setCopiedLinkId] = useState(null);
 
   const handleCopy = (url, id) => {
-    navigator.clipboard.writeText(url);
-    setCopiedLinkId(id);
-    setTimeout(() => setCopiedLinkId(null), 1500);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url)
+        .then(() => {
+          setCopiedLinkId(id);
+          setTimeout(() => setCopiedLinkId(null), 1500);
+        })
+        .catch(() => fallbackCopy(url, id));
+    } else {
+      fallbackCopy(url, id);
+    }
+  };
+
+  const fallbackCopy = (text, id) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        setCopiedLinkId(id);
+        setTimeout(() => setCopiedLinkId(null), 1500);
+      }
+    } catch (err) {
+      console.error('Fallback: Copy failed', err);
+    }
+
+    document.body.removeChild(textarea);
   };
 
   const handleShowMore = () => setVisibleCount((prev) => prev + 8);

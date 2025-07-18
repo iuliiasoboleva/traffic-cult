@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import { isMobile } from 'react-device-detect';
 
 import { subDays } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
 import calendarIcon from '../../assets/images/icons/white-calendar.svg';
+import useIsTablet from '../../hooks/useIsTablet';
 import FilterBottomSheet from '../FilterBottomSheet';
 import { Button, DateInput, FilterButton, FilterGroup, InputBlock } from './styles';
 
@@ -15,9 +15,10 @@ const yesterday = subDays(today, 1);
 const LinksFilterPanel = ({ onFilter }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [showMobileFilter, setShowMobileFilter] = useState(false);
+  const [showTabletFilter, setShowTabletFilter] = useState(false);
 
   const isValid = startDate && endDate && startDate <= endDate;
+  const isTablet = useIsTablet();
 
   const handleSearch = () => {
     if (isValid) {
@@ -25,16 +26,16 @@ const LinksFilterPanel = ({ onFilter }) => {
     }
   };
 
-  if (isMobile) {
+  if (isTablet) {
     return (
       <>
-        <FilterButton onClick={() => setShowMobileFilter(true)}>
+        <FilterButton onClick={() => setShowTabletFilter(true)}>
           <img src={calendarIcon} alt="Календарь" width={15} height={15} />
           <span>Фильтр</span>
         </FilterButton>
         <FilterBottomSheet
-          visible={showMobileFilter}
-          onClose={() => setShowMobileFilter(false)}
+          visible={showTabletFilter}
+          onClose={() => setShowTabletFilter(false)}
           startDate={startDate}
           endDate={endDate}
           setStartDate={setStartDate}

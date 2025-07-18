@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
+import linkIcon from '../../assets/images/icons/empty-link.svg';
 import linksIcon from '../../assets/images/icons/links.svg';
 import registrationsIcon from '../../assets/images/icons/registrations.svg';
 import salesIcon from '../../assets/images/icons/sales.svg';
-import EmptyLinksPlaceholder from '../../components/EmptyLinksPlaceholder';
+import EmptyPlaceholder from '../../components/EmptyPlaceholder';
 import LinksFilterPanel from '../../components/LinksFilterPanel';
 import LinksList from '../../components/LinksList';
 import LinksTabs from '../../components/LinksTabs';
-import Sidebar from '../../components/Sidebar';
 import StatsSection from '../../components/StatsSection';
 import { capitalize } from '../../helpers';
 import { linksMock } from '../../mocks/linksMock';
 import { userMock } from '../../mocks/userMock';
-import { Container, Content, FilterWrapper, LinkTitle, LinkWrapper, StyledLevel } from './styles';
+import { FilterWrapper, LinkTitle, LinkWrapper, StyledLevel } from './styles';
 
 const statsMock = [
   {
@@ -36,8 +36,7 @@ const statsMock = [
   { label: 'Тотал\nпродаж', value: 180, icon: '', isCurrency: true },
 ];
 
-const menuMock = [{ label: 'Трафик культ' }, { label: 'Название №2' }, { label: 'Название №3' }];
-const title = 'Трафик\nКульт ®';
+const tabs = ['Все ссылки', 'Избранные', 'Архив', 'Junior', 'Senior'];
 
 const HomePage = () => {
   const [filteredLinks, setFilteredLinks] = useState([]);
@@ -84,33 +83,37 @@ const HomePage = () => {
   };
 
   return (
-    <Container>
-      <Sidebar title={title} user={userMock} menuItems={menuMock} />
-      <Content>
-        <StatsSection title="Личная статистика" stats={statsMock} />
-        <StatsSection
-          title={
-            <>
-              Общая статистика{' '}
-              <StyledLevel level={userMock.level}>{capitalize(userMock.level)}</StyledLevel>
-            </>
-          }
-          stats={statsMock}
-        />
-        <LinkWrapper>
-          <LinkTitle>Статистика по ссылкам</LinkTitle>
-          <FilterWrapper>
-            <LinksTabs value={activeTab} onChange={setActiveTab} />
-            <LinksFilterPanel onFilter={handleFilter} />
-          </FilterWrapper>
-          {filteredLinks.length === 0 ? (
-            <EmptyLinksPlaceholder onCreate={() => console.log('Создать ссылку')} />
-          ) : (
-            <LinksList items={filteredLinks} />
-          )}
-        </LinkWrapper>
-      </Content>
-    </Container>
+    <>
+      <StatsSection title="Личная статистика" stats={statsMock} />
+      <StatsSection
+        title={
+          <>
+            Общая статистика{' '}
+            <StyledLevel level={userMock.level}>{capitalize(userMock.level)}</StyledLevel>
+          </>
+        }
+        stats={statsMock}
+      />
+      <LinkWrapper>
+        <LinkTitle>Статистика по ссылкам</LinkTitle>
+        <FilterWrapper>
+          <LinksTabs tabs={tabs} value={activeTab} onChange={setActiveTab} />
+          <LinksFilterPanel onFilter={handleFilter} />
+        </FilterWrapper>
+        {filteredLinks.length === 0 ? (
+          <EmptyPlaceholder
+            icon={linkIcon}
+            count={0}
+            title="У вас ещё нет созданных ссылок"
+            subtitle="Чтобы провести анализ и начать работать с трафиком, создайте ссылку"
+            buttonLabel="Создать ссылку"
+            onButtonClick={() => console.log('Создать ссылку')}
+          />
+        ) : (
+          <LinksList items={filteredLinks} />
+        )}
+      </LinkWrapper>
+    </>
   );
 };
 

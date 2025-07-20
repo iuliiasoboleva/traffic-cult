@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 
 import archiveIcon from '../../assets/images/icons/archive.svg';
 import chartIcon from '../../assets/images/icons/chart.svg';
@@ -32,8 +33,9 @@ const menuItems = [
   },
 ];
 
-const DropdownMenu = ({ onClose, position }) => {
+const DropdownMenu = ({ onClose, position, linkId }) => {
   const ref = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -62,14 +64,18 @@ const DropdownMenu = ({ onClose, position }) => {
       {menuItems.map(({ label, icon, danger }) => {
         const Item = danger ? DangerItem : DropdownItem;
 
+        const handleClick = () => {
+          if (label === 'Аналитика') {
+            navigate(`/analytics/${linkId}`);
+          } else {
+            console.log(`${label} clicked`);
+          }
+
+          onClose?.();
+        };
+
         return (
-          <Item
-            key={label}
-            onClick={() => {
-              console.log(`${label} clicked`);
-              onClose?.();
-            }}
-          >
+          <Item key={label} onClick={handleClick}>
             <img src={icon} alt={label} />
             {label}
           </Item>

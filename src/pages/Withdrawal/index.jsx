@@ -58,7 +58,6 @@ const Withdrawal = () => {
     let filtered = [...moneyMock];
     const now = new Date();
 
-    // фильтр по табу
     switch (activeTab) {
       case 'Сегодня': {
         const start = new Date(now.setHours(0, 0, 0, 0));
@@ -83,10 +82,9 @@ const Withdrawal = () => {
         break;
       }
       default:
-        break; // "Всё время" — не фильтруем
+        break;
     }
 
-    // фильтр по пользовательскому диапазону
     if (customDateRange) {
       const from = new Date(customDateRange.from.setHours(0, 0, 0, 0));
       const to = new Date(customDateRange.to.setHours(23, 59, 59, 999));

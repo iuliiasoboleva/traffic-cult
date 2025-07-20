@@ -37,7 +37,7 @@ export const Title = styled.h3`
 
 export const CardsGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1.4fr; /* третья шире */
+  grid-template-columns: 1fr 1fr 1.4fr;
   gap: 16px;
 
   @media (max-width: 1240px) {

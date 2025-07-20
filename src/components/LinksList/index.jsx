@@ -40,7 +40,8 @@ const LinksList = ({ items }) => {
 
   const handleCopy = (url, id) => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url)
+      navigator.clipboard
+        .writeText(url)
         .then(() => {
           setCopiedLinkId(id);
           setTimeout(() => setCopiedLinkId(null), 1500);
@@ -176,8 +177,13 @@ const LinksList = ({ items }) => {
         </Table>
       </ScrollWrapper>
 
-      {openMenu && <DropdownMenu position={openMenu.position} onClose={() => setOpenMenu(null)} />}
-
+      {openMenu && (
+        <DropdownMenu
+          position={openMenu.position}
+          linkId={openMenu.id}
+          onClose={() => setOpenMenu(null)}
+        />
+      )}
       {visibleCount < items.length && (
         <ShowMoreButton onClick={handleShowMore}>Показать все ссылки</ShowMoreButton>
       )}

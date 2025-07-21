@@ -61,7 +61,7 @@ const MoneyList = ({ items }) => {
     <>
       <ScrollWrapper>
         <Table>
-          <thead>
+          <thead style={{ height: '50px' }}>
             <tr>
               <Th width="100px">Дата</Th>
               <Th width="120px">Тип</Th>
@@ -76,10 +76,10 @@ const MoneyList = ({ items }) => {
             {items.slice(0, visibleCount).map((item, i) => (
               <tr key={i}>
                 <Td>{item.date}</Td>
-                <Td style={{ color: item.type === 'Вывод средств' ? '#00B2FF' : '#52C41A' }}>
+                <Td style={{ color: item.type === 'Вывод средств' ? '#7D829D' : '#419957' }}>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                     <img
-                      src={item.type === 'Вывод средств' ? arrowUp : arrowDown}
+                      src={item.type === 'Вывод средств' ? arrowDown : arrowUp}
                       alt="arrow"
                       style={{ width: 14, height: 14 }}
                     />
@@ -91,7 +91,12 @@ const MoneyList = ({ items }) => {
                 <Td>{formatCurrency(item.amount)}</Td>
                 <Td>{formatCurrency(item.commission)}</Td>
                 <TdProfit>
-                  <span style={{ color: item.credited > 0 ? '#419957' : '#FF4D4F' }}>
+                  <span
+                    style={{
+                      color: item.credited > 0 ? '#419957' : '#7D829D',
+                      backgroundColor: item.credited > 0 ? '#121c15' : '#18191C',
+                    }}
+                  >
                     {item.credited > 0 ? '+' : ''}
                     {formatCurrency(item.credited)}
                   </span>

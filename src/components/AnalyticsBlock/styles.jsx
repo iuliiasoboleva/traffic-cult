@@ -12,11 +12,12 @@ export const BlockWrapper = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right;
+  min-height: 177px;
 
   @media (max-width: 768px) {
     background-image: none;
     padding: 12px;
-    height: 147px;
+    min-height: 147px;
   }
 `;
 
@@ -49,7 +50,7 @@ export const BlockStat = styled.div`
   font-size: 28px;
   font-weight: 600;
   gap: 6px;
-  margin-top: 12px;
+  margin-top: auto;
 
   @media (max-width: 768px) {
     img {

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import linkIcon from '../../assets/images/icons/link.svg';
 import switchIcon from '../../assets/images/icons/switch.svg';
-import { formatCurrency } from '../../helpers';
+import { formatCurrency, sortItems } from '../../helpers';
 import DropdownMenu from '../DropdownMenu';
+import Modal from '../Modal';
 import {
   ActionBtn,
   ScrollWrapper,
@@ -16,27 +17,16 @@ import {
   Th,
 } from './styles';
 
-const sortItems = (items, key, direction) => {
-  const sorted = [...items].sort((a, b) => {
-    const valueA = a[key].toString().replace(/[^\d.-]+/g, '');
-    const valueB = b[key].toString().replace(/[^\d.-]+/g, '');
-    const isNumeric = !isNaN(valueA) && !isNaN(valueB);
-
-    if (isNumeric) {
-      return direction === 'asc' ? valueA - valueB : valueB - valueA;
-    }
-
-    return direction === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
-  });
-
-  return sorted;
-};
-
 const LinksList = ({ items }) => {
   const [visibleCount, setVisibleCount] = useState(8);
   const [openMenu, setOpenMenu] = useState(null);
   const [sort, setSort] = useState({ key: null, direction: 'asc' });
   const [copiedLinkId, setCopiedLinkId] = useState(null);
+  const [modalConfig, setModalConfig] = useState(null);
+
+  const handleModalClose = () => {
+    setModalConfig(null);
+  };
 
   const handleCopy = (url, id) => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -102,6 +92,12 @@ const LinksList = ({ items }) => {
       },
     });
   };
+
+  useEffect(() => {
+    if (modalConfig) {
+      setOpenMenu(null);
+    }
+  }, [modalConfig]);
 
   const renderSortArrow = (columnKey) => {
     if (sort.key !== columnKey) {
@@ -182,10 +178,26 @@ const LinksList = ({ items }) => {
           position={openMenu.position}
           linkId={openMenu.id}
           onClose={() => setOpenMenu(null)}
+          setModalConfig={setModalConfig}
         />
       )}
       {visibleCount < items.length && (
         <ShowMoreButton onClick={handleShowMore}>Показать все ссылки</ShowMoreButton>
+      )}
+      {modalConfig && (
+        <Modal
+          icon={modalConfig.icon}
+          title={modalConfig.title}
+          text={modalConfig.text}
+          confirmLabel={modalConfig.confirmLabel}
+          cancelLabel={modalConfig.cancelLabel}
+          danger={modalConfig.danger}
+          onConfirm={() => {
+            modalConfig.onConfirm?.();
+          }}
+          onCancel={handleModalClose}
+          onClose={handleModalClose}
+        />
       )}
     </>
   );

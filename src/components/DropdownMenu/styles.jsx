@@ -6,7 +6,7 @@ export const DropdownMenuWrapper = styled.div`
   border-radius: 5px;
   padding: 4px 0;
   min-width: 180px;
-  z-index: 9999;
+  z-index: 999;
   position: absolute;
   display: flex;
   flex-direction: column;

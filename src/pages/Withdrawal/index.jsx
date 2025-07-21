@@ -85,7 +85,7 @@ const Withdrawal = () => {
         break;
     }
 
-    if (customDateRange) {
+    if (customDateRange?.from && customDateRange?.to) {
       const from = new Date(customDateRange.from.setHours(0, 0, 0, 0));
       const to = new Date(customDateRange.to.setHours(23, 59, 59, 999));
       filtered = filterByDate(filtered, from, to);
@@ -103,6 +103,10 @@ const Withdrawal = () => {
   };
 
   const handleFilter = (range) => {
+    if (!range?.from || !range?.to) {
+      setCustomDateRange(null);
+      return;
+    }
     setCustomDateRange(range);
   };
 

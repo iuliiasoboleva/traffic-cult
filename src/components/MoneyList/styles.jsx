@@ -160,7 +160,6 @@ export const ButtonBlock = styled.div`
     margin: 20px auto;
     width: 100%;
     flex-direction: column-reverse;
-    gap: 4px;
   }
 `;
 
@@ -185,16 +184,17 @@ export const ShowMoreButton = styled.button`
     width: 100%;
     text-align: center;
     font-size: 14px;
+    margin-bottom: 8px;
   }
 `;
 
 export const DownloadButton = styled.button`
   margin-bottom: 20px;
-  padding: 12px 20px;
+  padding: 15px 20px;
   background: none;
   border: 1px solid #454a52;
   border-radius: 6px;
-  color: #fff;
+  color: #41454f;
   font-size: 16px;
   font-family: 'Inter Tight', sans-serif;
   cursor: pointer;
@@ -207,8 +207,8 @@ export const DownloadButton = styled.button`
   }
 
   img {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 
   @media (max-width: 768px) {

@@ -206,8 +206,9 @@ export const BlocksGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+  margin-top: 20px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1120px) {
     grid-template-columns: repeat(2, 1fr);
   }
 `;

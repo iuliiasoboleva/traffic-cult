@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Inter', sans-serif;
     background-color: #121315;
     color: #FFFFFF;
+    max-width: 1800px;
   }
 
   #root {

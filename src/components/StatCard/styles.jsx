@@ -33,6 +33,24 @@ export const Label = styled.div`
 
   @media (max-width: 768px) {
     font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
+export const MobileAction = styled.div`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+`;
+
+export const DesktopAction = styled.div`
+  display: flex;
+
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -73,12 +91,13 @@ export const IconWrapper = styled.div`
 `;
 
 export const Sublabel = styled.div`
-  font-size: 12px;
-  line-height: 1.2;
-  color: #777c85;
+  color: #585e72;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: -0.02em;
   margin-top: 4px;
 
   @media (max-width: 768px) {
-    font-size: 11px;
+    font-size: 12px;
   }
 `;

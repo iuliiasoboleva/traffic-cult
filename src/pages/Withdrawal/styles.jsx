@@ -26,11 +26,13 @@ export const StyledLevel = styled.span`
 
 export const ButtonStyled = styled.button`
   background: transparent;
-  border: 1px solid #ff5e1a;
-  color: #ff5e1a;
-  padding: 6px 10px;
+  border: 1px solid #f24822;
+  color: #f24822;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 400;
+  padding: 10px 15px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -42,6 +44,5 @@ export const ButtonStyled = styled.button`
 
   @media (max-width: 768px) {
     font-size: 12px;
-    padding: 4px 8px;
   }
 `;

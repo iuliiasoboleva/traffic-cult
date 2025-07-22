@@ -6,6 +6,7 @@ import EmptyPlaceholder from '../../components/EmptyPlaceholder';
 import LinksFilterPanel from '../../components/LinksFilterPanel';
 import LinksTabs from '../../components/LinksTabs';
 import MoneyList from '../../components/MoneyList';
+import WithdrawalModal from '../../components/WithdrawalModal';
 import WithdrawalSection from '../../components/WithdrawalSection';
 import { moneyMock } from '../../mocks/moneyMock';
 import { ButtonStyled, FilterWrapper, LinkWrapper } from './styles';
@@ -16,6 +17,7 @@ const Withdrawal = () => {
   const [filteredMoney, setFilteredMoney] = useState([]);
   const [activeTab, setActiveTab] = useState('Сегодня');
   const [customDateRange, setCustomDateRange] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const withdrawalData = {
     balance: 904,
@@ -41,8 +43,8 @@ const Withdrawal = () => {
       isCurrency: true,
       ...(withdrawalData.available > 0 && {
         action: (
-          <ButtonStyled>
-            <img src={withdrawIcon} alt="Вывод" />
+          <ButtonStyled onClick={() => setIsModalOpen(true)}>
+            <img src={withdrawIcon} alt="Вывод средств" />
             Вывод средств
           </ButtonStyled>
         ),
@@ -129,6 +131,7 @@ const Withdrawal = () => {
           <MoneyList items={filteredMoney} />
         )}
       </LinkWrapper>
+      {isModalOpen && <WithdrawalModal onClose={() => setIsModalOpen(false)} />}
     </>
   );
 };

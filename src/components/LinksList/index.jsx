@@ -4,6 +4,7 @@ import linkIcon from '../../assets/images/icons/link.svg';
 import switchIcon from '../../assets/images/icons/switch.svg';
 import { formatCurrency, sortItems } from '../../helpers';
 import DropdownMenu from '../DropdownMenu';
+import EditCostModal from '../EditCostModal';
 import Modal from '../Modal';
 import {
   ActionBtn,
@@ -23,6 +24,8 @@ const LinksList = ({ items }) => {
   const [sort, setSort] = useState({ key: null, direction: 'asc' });
   const [copiedLinkId, setCopiedLinkId] = useState(null);
   const [modalConfig, setModalConfig] = useState(null);
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [editableLink, setEditableLink] = useState(null);
 
   const handleModalClose = () => {
     setModalConfig(null);
@@ -179,6 +182,10 @@ const LinksList = ({ items }) => {
           linkId={openMenu.id}
           onClose={() => setOpenMenu(null)}
           setModalConfig={setModalConfig}
+          onEdit={(link) => {
+            setEditableLink(link);
+            setEditModalOpen(true);
+          }}
         />
       )}
       {visibleCount < items.length && (
@@ -198,6 +205,9 @@ const LinksList = ({ items }) => {
           onCancel={handleModalClose}
           onClose={handleModalClose}
         />
+      )}
+      {isEditModalOpen && editableLink && (
+        <EditCostModal link={editableLink} onClose={() => setEditModalOpen(false)} />
       )}
     </>
   );

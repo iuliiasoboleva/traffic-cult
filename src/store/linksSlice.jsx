@@ -24,8 +24,15 @@ const linksSlice = createSlice({
         link.archived = !link.archived;
       }
     },
+    updateCost: (state, action) => {
+      const { id, newCost } = action.payload;
+      const link = state.items.find((link) => link.id === id);
+      if (link) {
+        link.cost = newCost;
+      }
+    },
   },
 });
 
-export const { setLinks, toggleFavorite, toggleArchived } = linksSlice.actions;
+export const { setLinks, toggleFavorite, toggleArchived, updateCost } = linksSlice.actions;
 export default linksSlice.reducer;

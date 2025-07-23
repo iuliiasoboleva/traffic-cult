@@ -89,7 +89,7 @@ const Step3Amount = ({ method, setAmount, onBack, onSubmit }) => {
       <ModalText>Введите сумму, которую хотите вывести</ModalText>
 
       <Controller
-        name="cardNumber"
+        name="amount"
         control={control}
         render={({ field }) => (
           <StyledInputWrapper>

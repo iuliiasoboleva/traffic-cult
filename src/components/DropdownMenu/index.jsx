@@ -36,7 +36,7 @@ const menuItems = [
   },
 ];
 
-const DropdownMenu = ({ onClose, position, linkId, setModalConfig }) => {
+const DropdownMenu = ({ onClose, position, linkId, setModalConfig, onEdit }) => {
   const ref = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ const DropdownMenu = ({ onClose, position, linkId, setModalConfig }) => {
       navigate(`/analytics/${linkId}`);
       onClose?.();
     } else if (label === 'Редактирование') {
-      console.log('Редактирование');
+      onEdit?.(link);
       onClose?.();
     } else if (label === 'Избранное') {
       const isFav = link.favorite;

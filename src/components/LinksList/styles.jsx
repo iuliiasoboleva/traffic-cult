@@ -32,8 +32,10 @@ export const Table = styled.table`
     background-color: transparent;
   }
 
-  tbody tr:hover {
-    background-color: #2c3036;
+  @media (hover: hover) and (pointer: fine) {
+    tbody tr:hover {
+      background-color: #2c3036;
+    }
   }
 
   @media (max-width: 768px) {

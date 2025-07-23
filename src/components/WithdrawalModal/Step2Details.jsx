@@ -24,10 +24,17 @@ import {
   Subtitle,
 } from './styles';
 
+const cyrillicRegex = /^[А-ЯЁа-яё\s-]+$/;
+const cardNameRegex = /^[\p{L}\p{N}\s-]+$/u;
+
 const schemaRUB = yup.object().shape({
-  surname: yup.string().required('Введите фамилию'),
-  name: yup.string().required('Введите имя'),
-  cardName: yup.string().required('Название карты обязательно'),
+  surname: yup.string().required('Введите фамилию').matches(cyrillicRegex, 'Только кириллица'),
+  name: yup.string().required('Введите имя').matches(cyrillicRegex, 'Только кириллица'),
+  patronymic: yup.string().notRequired().matches(cyrillicRegex, 'Только кириллица').nullable(),
+  cardName: yup
+    .string()
+    .required('Название карты обязательно')
+    .matches(cardNameRegex, 'Допустимы буквы и цифры'),
   cardNumber: yup
     .string()
     .required('Введите номер карты')

@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-import arrowDown from '../../assets/images/icons/arrow-down.svg';
-import arrowUp from '../../assets/images/icons/arrow-up.svg';
-
 export const ModalOverlay = styled.div`
   position: fixed;
   inset: 0;
@@ -25,6 +22,7 @@ export const ModalWrapper = styled.div`
   height: 100%;
   max-width: 480px;
   max-height: fit-content;
+  overflow-y: auto;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -32,7 +30,7 @@ export const ModalWrapper = styled.div`
   @media (max-width: 768px) {
     max-width: 280px;
     border-radius: 12px;
-    padding: 15px;
+    padding: 25px 15px 15px;
   }
 `;
 
@@ -102,6 +100,12 @@ export const ModalButton = styled.button`
   max-width: 385px;
   width: ${({ type }) => (type === 'button' ? 'auto' : '100%')};
   white-space: pre;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 
   &:hover {
     opacity: 0.9;
@@ -239,6 +243,7 @@ export const Label = styled.div`
   font-size: 14px;
   letter-spacing: -0.02em;
   justify-self: flex-start;
+  text-align: left;
 
   @media (max-width: 768px) {
     font-size: 12px;

@@ -4,13 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import doneIcon from '../../assets/images/done.png';
-import errorIcon from '../../assets/images/error.png';
 import archiveIcon from '../../assets/images/icons/archive.svg';
 import chartIcon from '../../assets/images/icons/chart.svg';
 import editIcon from '../../assets/images/icons/edit.svg';
 import starIcon from '../../assets/images/icons/star.svg';
 import trashIcon from '../../assets/images/icons/trash.svg';
-import successIcon from '../../assets/images/success.png';
 import { toggleArchived, toggleFavorite } from '../../store/linksSlice';
 import { DangerItem, DropdownItem, DropdownMenuWrapper } from './styles';
 

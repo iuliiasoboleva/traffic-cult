@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { userMock } from '../../mocks/userMock';
 import {
   Badge,
   CardContainer,
@@ -22,7 +23,7 @@ const Step1Method = ({ method, setMethod, onNext }) => {
       </ProgressWrapper>
 
       <ModalTitle>Выберите подходящий способ для вывода средств</ModalTitle>
-      <ModalText>Доступно: ₽ 5 683.00</ModalText>
+      <ModalText>Доступно: ₽ {userMock.withdrawalData.available}</ModalText>
 
       <CardContainer>
         <WithdrawCard $selected={method === 'RUB'} onClick={() => setMethod('RUB')}>

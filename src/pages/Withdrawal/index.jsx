@@ -5,10 +5,12 @@ import withdrawIcon from '../../assets/images/icons/withdraw-red.svg';
 import EmptyPlaceholder from '../../components/EmptyPlaceholder';
 import LinksFilterPanel from '../../components/LinksFilterPanel';
 import LinksTabs from '../../components/LinksTabs';
+import Modal from '../../components/Modal';
 import MoneyList from '../../components/MoneyList';
 import WithdrawalModal from '../../components/WithdrawalModal';
 import WithdrawalSection from '../../components/WithdrawalSection';
 import { moneyMock } from '../../mocks/moneyMock';
+import { userMock } from '../../mocks/userMock';
 import { ButtonStyled, FilterWrapper, LinkWrapper } from './styles';
 
 const tabs = ['Сегодня', 'Неделя', 'Месяц', 'Всё время'];
@@ -18,30 +20,25 @@ const Withdrawal = () => {
   const [activeTab, setActiveTab] = useState('Сегодня');
   const [customDateRange, setCustomDateRange] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const withdrawalData = {
-    balance: 904,
-    turnover: 1000,
-    available: 808.5,
-  };
+  const [modalConfig, setModalConfig] = useState(null);
 
   const withdrawalMock = [
     {
       label: 'Баланс',
-      value: withdrawalData.balance,
+      value: userMock.withdrawalData.balance,
       isCurrency: true,
     },
     {
       label: 'Оборот',
       sublabel: '(за всё время)',
-      value: withdrawalData.turnover,
+      value: userMock.withdrawalData.turnover,
       isCurrency: true,
     },
     {
       label: 'Доступно\nдля вывода',
-      value: withdrawalData.available,
+      value: userMock.withdrawalData.available,
       isCurrency: true,
-      ...(withdrawalData.available > 0 && {
+      ...(userMock.withdrawalData.available > 0 && {
         action: (
           <ButtonStyled onClick={() => setIsModalOpen(true)}>
             <img src={withdrawIcon} alt="Вывод средств" />
@@ -131,7 +128,19 @@ const Withdrawal = () => {
           <MoneyList items={filteredMoney} />
         )}
       </LinkWrapper>
-      {isModalOpen && <WithdrawalModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && (
+        <WithdrawalModal onClose={() => setIsModalOpen(false)} setModalConfig={setModalConfig} />
+      )}
+      {modalConfig && (
+        <Modal
+          icon={modalConfig.icon}
+          title={modalConfig.title}
+          text={modalConfig.text}
+          confirmLabel={modalConfig.confirmLabel}
+          onConfirm={modalConfig.onConfirm}
+          onClose={() => setModalConfig(null)}
+        />
+      )}
     </>
   );
 };

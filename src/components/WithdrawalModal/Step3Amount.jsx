@@ -1,9 +1,10 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { userMock } from '../../mocks/userMock';
 import {
   ErrorText,
   Label,
@@ -14,20 +15,23 @@ import {
   ProgressWrapper,
   Step,
   StyledInput,
+  StyledInputWrapper,
   Summary,
+  SummaryRow,
 } from './styles';
 
 const Step3Amount = ({ method, setAmount, onBack, onSubmit }) => {
-  const balance = method === 'RUB' ? 5683 : 5683 / 13.53;
+  const rawBalance = userMock.withdrawalData.available; // баланс всегда в рублях
+  const rate = userMock.withdrawalData.usdtToRubRate;
   const maxDigits = 9;
 
   const schema = yup.object().shape({
     amount: yup
       .string()
       .required('Введите сумму')
-      .test('valid', 'Недостаточно средств', (val) => {
+      .test('valid', 'Недостаточно средств на балансе', (val) => {
         const numeric = parseFloat(val.replace(/\s|₽/g, '').replace(',', '.'));
-        return numeric > 0 && numeric <= balance;
+        return numeric > 0 && numeric <= rawBalance;
       }),
   });
 
@@ -36,6 +40,7 @@ const Step3Amount = ({ method, setAmount, onBack, onSubmit }) => {
     handleSubmit,
     setValue,
     watch,
+    control,
     formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
@@ -81,34 +86,48 @@ const Step3Amount = ({ method, setAmount, onBack, onSubmit }) => {
       </ProgressWrapper>
 
       <ModalTitle>Сумма к выводу</ModalTitle>
-      <ModalText>Введите сумму которую хотите вывести</ModalText>
+      <ModalText>Введите сумму, которую хотите вывести</ModalText>
 
-      <Label>{errors.amount?.message && <ErrorText>{errors.amount.message}</ErrorText>}</Label>
-
-      <StyledInput
-        placeholder="Сумма"
-        inputMode="numeric"
-        {...register('amount')}
-        value={rawValue}
-        onChange={handleInputChange}
-        error={!!errors.amount}
+      <Controller
+        name="cardNumber"
+        control={control}
+        render={({ field }) => (
+          <StyledInputWrapper>
+            {errors.amount?.message ? (
+              <ErrorText>{errors.amount?.message}</ErrorText>
+            ) : (
+              <Label>Сумма вывода</Label>
+            )}
+            <StyledInput
+              {...field}
+              inputMode="numeric"
+              {...register('amount')}
+              value={rawValue}
+              onChange={handleInputChange}
+              error={!!errors.amount}
+            />
+          </StyledInputWrapper>
+        )}
       />
 
       <Summary>
-        <div>
-          К выводу
-          <b>
+        <SummaryRow>
+          <span>К выводу</span>
+          <p>
             {method === 'USDT'
-              ? `${(getNumeric() / 13.53).toFixed(2)} USDT`
+              ? `${(getNumeric() / rate).toFixed(2)} USDT`
               : `${getNumeric().toFixed(2)} RUB`}
-          </b>
-        </div>
-        <div>
-          Баланс{' '}
-          <b>
-            {balance.toFixed(2)} {method}
-          </b>
-        </div>
+          </p>
+        </SummaryRow>
+
+        <SummaryRow>
+          <span>Баланс</span>
+          <p>
+            {method === 'USDT'
+              ? `${(rawBalance / rate).toFixed(2)} USDT`
+              : `${rawBalance.toFixed(2)} RUB`}
+          </p>
+        </SummaryRow>
       </Summary>
 
       <ModalActions>
